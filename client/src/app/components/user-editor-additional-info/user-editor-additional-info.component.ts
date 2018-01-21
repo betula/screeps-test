@@ -13,9 +13,9 @@ import { createDiff, applyDiff } from '../../libs/diff-utils';
 })
 export class UserEditorAdditionalInfoComponent implements OnInit {
 
-  @Input('user')
-  set userSetter(value) {
-    this.user = value;
+  @Input('additionalInfo')
+  set additionalInfoSetter(value) {
+    this.additionalInfo = value;
     this.syncEditorData();
   }
 
@@ -31,7 +31,7 @@ export class UserEditorAdditionalInfoComponent implements OnInit {
   @Output() diffChange: EventEmitter<any> = new EventEmitter();
 
   private editor: any;
-  private user: any;
+  private additionalInfo: any;
   private diff: any;
 
   constructor(
@@ -40,7 +40,7 @@ export class UserEditorAdditionalInfoComponent implements OnInit {
 
   ngOnInit() {
     this.editor = new Editor(this.hostElement.nativeElement, {
-      onChange: (a,b,c,d,e) => {
+      onChange: () => {
         this.onEditorChanged();
       }
     });
@@ -48,15 +48,15 @@ export class UserEditorAdditionalInfoComponent implements OnInit {
   }
 
   syncEditorData() {
-    if (!this.editor || !this.user) {
+    if (!this.editor || !this.additionalInfo) {
       return;
     }
-    const data = applyDiff(this.user.additionalInfo, this.diff);
+    const data = applyDiff(this.additionalInfo, this.diff);
     this.editor.set(data);
   }
 
   onEditorChanged() {
-    this.diff = createDiff(this.user.additionalInfo, this.editor.get());
+    this.diff = createDiff(this.additionalInfo, this.editor.get());
     this.diffChange.emit(this.diff);
   }
 

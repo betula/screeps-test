@@ -4,8 +4,8 @@ import {Component, Input} from '@angular/core';
   selector: 'app-user-view-status',
   template: `
     <span
-      [class]="user.status">
-      {{ user.status }}
+      [class]="status">
+      {{ status }}
     </span>
   `,
   styles: [`
@@ -22,5 +22,5 @@ import {Component, Input} from '@angular/core';
   `]
 })
 export class UserViewStatusComponent {
-  @Input() user;
+  @Input() status;
 }

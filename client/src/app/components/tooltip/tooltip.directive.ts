@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, Renderer} from '@angular/core';
+import {Directive, ElementRef, Input, Renderer2} from '@angular/core';
 import * as tippy from 'tippy.js';
 
 @Directive({
@@ -8,7 +8,7 @@ export class TooltipDirective {
 
   constructor(
     private hostElement: ElementRef,
-    private renderer : Renderer
+    private renderer : Renderer2
   ) {
     tippy(hostElement.nativeElement, {
       dynamicTitle: true
@@ -17,7 +17,7 @@ export class TooltipDirective {
 
   @Input('appTooltip')
   set title(title: string) {
-    this.renderer.setElementAttribute(this.hostElement.nativeElement, 'title', title);
+    this.renderer.setAttribute(this.hostElement.nativeElement, 'title', title);
   }
 
 }

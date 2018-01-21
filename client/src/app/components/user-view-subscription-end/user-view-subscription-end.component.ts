@@ -5,8 +5,8 @@ import {Component, Input} from '@angular/core';
   template: `
     <span
       [class.elapsed]="isElapsed()"
-      [appTooltip]="user.subscriptionEndTimestamp">
-        {{ user.subscriptionEndTimestamp | date }}
+      [appTooltip]="subscriptionEndTimestamp">
+        {{ subscriptionEndTimestamp | date }}
     </span>
   `,
   styles: [`
@@ -16,9 +16,9 @@ import {Component, Input} from '@angular/core';
   `]
 })
 export class UserViewSubscriptionEndComponent {
-  @Input() user;
+  @Input() subscriptionEndTimestamp;
 
   isElapsed() {
-    return Date.now() > this.user.subscriptionEndTimestamp;
+    return Date.now() > this.subscriptionEndTimestamp;
   }
 }

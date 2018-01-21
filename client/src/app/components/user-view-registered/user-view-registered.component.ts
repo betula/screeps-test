@@ -4,12 +4,12 @@ import {Component, Input} from '@angular/core';
   selector: 'app-user-view-registered',
   template: `
     <span
-      [appTooltip]="user.registeredTimestamp">
-      {{ user.registeredTimestamp | date }}
+      [appTooltip]="registeredTimestamp">
+      {{ registeredTimestamp | date }}
     </span>
   `,
   styles: []
 })
 export class UserViewRegisteredComponent {
-  @Input() user;
+  @Input() registeredTimestamp;
 }

@@ -10,9 +10,10 @@ import {Observable} from "rxjs/Observable";
         <span>{{ user._id }}</span>
         <span>{{ user.username }}</span>
         <span>{{ user.email }}</span>
-        <app-user-view-status [user]="user"></app-user-view-status>
-        <app-user-view-registered [user]="user"></app-user-view-registered>
-        <app-user-view-subscription-end [user]="user"></app-user-view-subscription-end>
+        <app-user-view-status [status]="user.status"></app-user-view-status>
+        <app-user-view-registered [registeredTimestamp]="user.registeredTimestamp"></app-user-view-registered>
+        <app-user-view-subscription-end 
+          [subscriptionEndTimestamp]="user.subscriptionEndTimestamp"></app-user-view-subscription-end>
       </a>
     </div>
   `,

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {UsersService} from "../../services/users.service";
-import {Observable} from "rxjs/Observable";
 import { isNotEmptyDiff } from '../../libs/diff-utils';
 
 import 'rxjs/add/operator/switchMap';
@@ -9,24 +8,27 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-user',
   template: `
-    <div *ngIf="userStream | async as user">
+    <div *ngIf="user">
       <div class="panel">
         <div>{{ user._id }}</div>
         <div>{{ user.username }}</div>
         <div>{{ user.email }}</div>
-        <app-user-view-status [user]="user"></app-user-view-status>
-        <app-user-view-registered [user]="user"></app-user-view-registered>
-        <app-user-view-subscription-end [user]="user"></app-user-view-subscription-end>
-        <app-user-view-additional-info [user]="user" *ngIf="isViewMode"></app-user-view-additional-info>
+        <app-user-view-status [status]="user.status"></app-user-view-status>
+        <app-user-view-registered [registeredTimestamp]="user.registeredTimestamp"></app-user-view-registered>
+        <app-user-view-subscription-end 
+          [subscriptionEndTimestamp]="user.subscriptionEndTimestamp"></app-user-view-subscription-end>
+        <app-user-view-additional-info 
+          [additionalInfo]="user.additionalInfo" 
+          *ngIf="isViewMode"></app-user-view-additional-info>
         <app-user-editor-additional-info
           *ngIf="isEditMode"
-          [user]="user"
+          [additionalInfo]="user.additionalInfo"
           [(diff)]="additionalInfoDiff"></app-user-editor-additional-info>
       </div>
 
       <button (click)="toEditMode()" *ngIf="isViewMode">EDIT</button>
       <div *ngIf="isEditMode">
-        <button (click)="cancelEditMode()">CANCEL</button>
+        <button (click)="cancelEditMode()">VIEW</button>
         <button
           class="save-button"
           (click)="additionalInfoDiffSave()" 
@@ -49,7 +51,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class UserComponent implements OnInit {
 
-  userStream: Observable<Object>;
+  user: any;
 
   additionalInfoDiff: any;
 
@@ -65,9 +67,12 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userStream = this.route.paramMap
+    this.route.paramMap
       .switchMap((params: ParamMap) => {
         return this.usersService.getUser(params.get('id'));
+      })
+      .subscribe((user) => {
+        this.user = user;
       });
   }
 
@@ -85,21 +90,16 @@ export class UserComponent implements OnInit {
   }
 
   additionalInfoDiffSave() {
-    this.userStream.subscribe(user => {
-      const diff = this.additionalInfoDiff;
+    const diff = this.additionalInfoDiff;
 
-      this.usersService.updateUserAdditionalInfo(user._id, {
-        $upsert: diff.upserted,
-        $delete: diff.deleted
-      })
-        .subscribe(additionalInfo => {
-
-          console.log(additionalInfo);
-
-          this.additionalInfoDiff = null;
-          user.additionalInfo = additionalInfo;
-        });
-    });
+    this.usersService.updateUserAdditionalInfo(this.user._id, {
+      $upsert: diff.upserted,
+      $delete: diff.deleted
+    })
+      .subscribe(additionalInfo => {
+        this.additionalInfoDiff = null;
+        this.user.additionalInfo = additionalInfo;
+      });
   }
 
 }
