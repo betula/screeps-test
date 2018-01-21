@@ -12,6 +12,8 @@ import { UserViewStatusComponent } from './user-view-status/user-view-status.com
 import { UserViewRegisteredComponent } from './user-view-registered/user-view-registered.component';
 import { UserViewSubscriptionEndComponent } from './user-view-subscription-end/user-view-subscription-end.component';
 import { TooltipDirective } from './tooltip/tooltip.directive';
+import { UserViewAdditionalInfoComponent } from './user-view-additional-info/user-view-additional-info.component';
+import { UserEditorAdditionalInfoComponent } from './user-editor-additional-info/user-editor-additional-info.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { TooltipDirective } from './tooltip/tooltip.directive';
     UserViewStatusComponent,
     UserViewRegisteredComponent,
     UserViewSubscriptionEndComponent,
-    TooltipDirective
+    TooltipDirective,
+    UserViewAdditionalInfoComponent,
+    UserEditorAdditionalInfoComponent
   ],
   imports: [
     BrowserModule,
