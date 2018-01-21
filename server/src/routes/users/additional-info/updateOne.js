@@ -10,11 +10,12 @@ module.exports = ({ route, api }) => {
     if (!user) return 403;
 
     body = body || {};
+
     let updatedUserAdditionalInfo = {};
     deepAssign(updatedUserAdditionalInfo, user.additionalInfo, body.$upsert || {});
     deepExclude(updatedUserAdditionalInfo, body.$delete || {});
 
-    return await api.setUserAdditionalInfo(id, updatedUserAdditionalInfo);
+    return await api.replaceUserAdditionalInfo(id, updatedUserAdditionalInfo);
   });
 
 };

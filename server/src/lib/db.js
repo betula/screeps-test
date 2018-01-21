@@ -14,11 +14,17 @@ module.exports = ({ filename }) => {
       return rows.filter(row => row._id === id)[ 0 ];
     },
 
-    async updateOne(id, data) {
-      const row = this.findOne(id);
+    async replaceOne(id, data) {
+      const row = await this.findOne(id);
       if (row) {
+        for (let key in row) {
+          if (row.hasOwnProperty(key)) {
+            delete row[key];
+          }
+        }
         deepAssign(row, data);
       }
+      return row;
     }
   }
 
