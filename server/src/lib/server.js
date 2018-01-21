@@ -1,12 +1,14 @@
 const
   Express = require('express'),
   Cors = require('cors'),
+  BodyParser = require('body-parser'),
   logger = require('./logger')
 ;
 
 module.exports = ({ hostname, port }) => {
   const express = Express();
   express.use(Cors());
+  express.use(BodyParser.json());
 
   return {
     route(method, pattern, handler) {
@@ -19,7 +21,8 @@ module.exports = ({ hostname, port }) => {
         Object.assign(context, {
           req,
           res,
-          headers: req.headers
+          headers: req.headers,
+          body: req.body
         });
 
         handler(context)

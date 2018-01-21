@@ -26,7 +26,9 @@
     "zone.js": "^0.8.19",
     "jsoneditor": "5.13.2",
     "deep-assign": "2.0.0",
-    "tippy.js": "2.0.9"
+    "tippy.js": "2.0.9",
+    "deep-object-diff": "1.0.4",
+    "extend_exclude": "1.0.9"
   },
   "devDependencies": {
     "@angular/cli": "1.6.5",

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from "../users.service";
+import {UsersService} from "../../services/users.service";
 import {Observable} from "rxjs/Observable";
 
 @Component({
@@ -41,7 +41,7 @@ export class UsersComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-    this.usersStream = this.usersService.getUsersStream();
+    this.usersStream = this.usersService.getUsers();
   }
 
 }

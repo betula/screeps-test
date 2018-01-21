@@ -1416,6 +1416,10 @@ deep-extend@~0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
 
+deep-object-diff@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/deep-object-diff/-/deep-object-diff-1.0.4.tgz#ee4c93b4a9da2962a568964c935a1989a416f9c4"
+
 define-properties@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
@@ -1889,6 +1893,10 @@ extend-shallow@^3.0.0:
 extend@~3.0.0, extend@~3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
+
+extend_exclude@1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/extend_exclude/-/extend_exclude-1.0.9.tgz#57dbb13d60be6e0f8c1f2fc3e81d205a7ed84d84"
 
 extglob@^0.3.1:
   version "0.3.2"

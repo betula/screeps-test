@@ -1,5 +1,4 @@
 
-
 module.exports = ({ route, api }) => {
 
   route('GET', '/users', async () => {
